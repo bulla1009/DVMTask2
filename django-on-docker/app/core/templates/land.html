@@ -1,0 +1,18 @@
+<h1>Welcome to the Bulla Store!</h1>
+<p class="text-muted">
+  <b>{{user.get_username}}</b> You are registered as a {% if user.is_vendor %} <b>Vendor</b> {% else %} <b>Customer</b>{% endif %}
+  {% if user.is_customer %}
+  <br>
+  {% if not user.wallet %} <a href="{% url 'customers:wallet_add' %}"> Add a wallet </a>
+  {% else %}
+  <p>Your Wallet Balance is :{{user.wallet.amount}}<a href="{% url 'customers:wallet_edit' user.pk %}"> Add Money </a></p>
+  {% endif %}
+  {% endif %}
+  <a href="{% url 'logout' %}">    Logout </a>
+</p>
+
+{% if user.is_vendor %} 
+<h2> Here is a list of products that you are selling ... </h2><br>
+<a href="{% url 'vendors:prod_add_list' %}"> Add Product  </a>
+{% else %} <h2>Here is a list of products being sold in the site by various vendors... </h2>
+{% endif %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+  {% include 'land.html' with active='new' %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>Vendor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td class="align-middle">{{ product.name }}</td>
+            <td class="align-middle">{{ product.description }}</td>
+            <td class="align-middle">{{ product.qty }} </td>
+            <td class="align-middle"> {{ product.owner.username }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No products matching your description.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
